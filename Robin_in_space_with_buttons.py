@@ -73,13 +73,6 @@ bullet.set_colorkey((0,0,0))
 fuel.set_colorkey((0,0,0))
 health_kit.set_colorkey((0,00,0))
 
-
-
-
-
-
-
-
 red_button = 11
 blue_button = 13
 green_button = 15
@@ -101,17 +94,6 @@ def setup():
 def destroy():
 
     GPIO.cleanup() # Release GPIO resource
-
-
-
-
-
-
-
-
-
-
-
 
 #game variables
 clock = pygame.time.Clock()
@@ -595,21 +577,6 @@ player_bullet_group = pygame.sprite.Group()
 bullets_shot = Player_bullet(robin.rect.x, robin.rect.x)
 player_bullet_group.add(bullets_shot)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #start menu
 def start_menu():
 
@@ -715,8 +682,6 @@ def game():
 
     while run:
 
-
-        
 
         while game_over == False:
 
@@ -849,8 +814,6 @@ while run:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-
-
 
 
     pygame.display.update()
