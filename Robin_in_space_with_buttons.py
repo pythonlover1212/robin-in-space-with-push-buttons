@@ -280,9 +280,6 @@ class Flying_asteroid(pygame.sprite.Sprite):
            spaceship_health.draw(screen)
            self.kill()
 
-        
-
-
        if self.rect.right < 0:
 
            self.kill()
@@ -567,7 +564,6 @@ def start_menu():
 
 
     GPIO.setup(black_button, GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-
 
     run = True
 
