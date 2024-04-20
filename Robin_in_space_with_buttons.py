@@ -1,3 +1,8 @@
+#Tiffany McKenzie
+#4/20/24
+#Final Project
+#version 1.0.0
+
 import pygame
 import random
 import math
@@ -21,7 +26,6 @@ background = pygame.image.load("custom_space_background.bmp").convert()
 
 robin_spaceship = pygame.image.load("robin_spaceship.bmp").convert()
 small_enemy_ship = pygame.image.load("small_enemy_ship.bmp").convert()
-#boss_enemy = pygame.image.load("boss_enemy.png")
 
 game_over_screen_pic = pygame.image.load("game_over_screen.bmp")
 
@@ -31,7 +35,6 @@ planet_3 = pygame.image.load("planet3.bmp").convert()
 planet_4 = pygame.image.load("planet4.bmp").convert()
 planet_5 = pygame.image.load("planet5.bmp").convert()
 planet_6 = pygame.image.load("planet6.bmp").convert()
-#sun = pygame.image.load("sun.bmp").convert()
 
 asteroid_1 = pygame.image.load("asteroid_1.bmp").convert()
 asteroid_2 = pygame.image.load("asteroid_2.bmp").convert()
@@ -41,20 +44,17 @@ fast_asteroid = pygame.image.load("flying_asteroid.bmp").convert()
 
 fuel = pygame.image.load("fuel.bmp").convert()
 health_kit = pygame.image.load("health_kit.bmp").convert()
-#bullet_pack = pygame.image.load("bullet_pack.png")
 
 bullet = pygame.image.load("bullet_shot.bmp").convert()
-#enemy_bullet = pygame.image.load("enemy_bullet.png")
 
 play_button_pic = pygame.image.load("play_button.bmp").convert()
 start_button_pic = pygame.image.load("start_button.bmp").convert()
 try_again_button_pic = pygame.image.load("try_again_button.bmp").convert()
 quit_button_pic = pygame.image.load("quit.bmp").convert()
 
-
+#editing the background of the pictures
 robin_spaceship.set_colorkey((0, 0, 0))
 small_enemy_ship.set_colorkey((0,0,0))
-#game_over_screen_pic.set_colorkey((0,0,0))
 
 planet_1.set_colorkey((255,255,255))
 planet_2.set_colorkey((255,255,255))
@@ -73,11 +73,15 @@ bullet.set_colorkey((0,0,0))
 fuel.set_colorkey((0,0,0))
 health_kit.set_colorkey((0,00,0))
 
+#button pin numbers
+
 red_button = 11
 blue_button = 13
 green_button = 15
 yellow_button = 19
 black_button = 21
+
+#breadboard button setup
 
 def setup():
     GPIO.setmode(GPIO.BOARD) # use PHYSICAL GPIO Numbering
@@ -88,17 +92,12 @@ def setup():
     GPIO.setup(yellow_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(black_button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-
-
-
 def destroy():
 
     GPIO.cleanup() # Release GPIO resource
 
 #game variables
 clock = pygame.time.Clock()
-
-
 
 score = 0
 
@@ -112,14 +111,10 @@ text_font = pygame.font.SysFont("Comic Sans", 60)
 
 game_over = False
 
-
-
-
 def displayed_text(text, font, text_col, x, y):
 
     img = font.render(text, True, text_col)
     screen.blit(img,(x,y))
-
 
 
 def scrolling_background():
@@ -162,6 +157,7 @@ class Scrolling_planets(pygame.sprite.Sprite):
 
            self.kill()
 
+#play button
 
 class Button():
     
@@ -189,7 +185,6 @@ class Button():
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
         return action
-
 
 #gas tank class
 class Gas:
@@ -229,9 +224,6 @@ class Health_bar:
         
         pygame.draw.rect(surface, "red", (self.x, self.y, self.width, self.height))
         pygame.draw.rect(surface, "green", (self.x, self.y, self.width * ratio, self.height))
-
-
-
 
 class Asteroids(pygame.sprite.Sprite):
 
@@ -294,8 +286,6 @@ class Flying_asteroid(pygame.sprite.Sprite):
        if self.rect.right < 0:
 
            self.kill()
-
-
 
 class Fuel(pygame.sprite.Sprite):
 
@@ -388,8 +378,6 @@ class Small_enemy(pygame.sprite.Sprite):
             spaceship_health.hp -=100
             self.kill()
 
-
-
 class Player_bullet(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
@@ -418,9 +406,8 @@ class Player_bullet(pygame.sprite.Sprite):
             self.on_screen = False
       
 
-
+#setting up player movement
 class Player:
-
 
     GPIO.setmode(GPIO.BOARD) # use PHYSICAL GPIO Numbering
   
@@ -433,8 +420,6 @@ class Player:
   
         self.image = pygame.transform.scale(robin_spaceship,(250, 200))
         self.rect = self.image.get_rect()
-
-
 
         self.rect.x = x
         self.rect.y = y
@@ -682,7 +667,6 @@ def game():
 
     while run:
 
-
         while game_over == False:
 
             score = 0
@@ -716,8 +700,6 @@ def game():
                 
                     space_rocks = Asteroids(1600,random.randint(0,600))
                     asteroid_group.add(space_rocks)
-
-
                             
                 if event.type == fast_asteroid_spawner:
 
@@ -747,8 +729,6 @@ def game():
 
                 if event.type == pygame.QUIT:
                     run = False
-
-
 
             scrolling_planets_group.draw(screen)
             scrolling_planets_group.update()
@@ -788,19 +768,10 @@ def game():
                 game_over = True
                 game_over_pop_up()
 
-
-            setup()
-            #try:
-                #loop()
-            #except KeyboardInterrupt: # Press ctrl-c to end the program.
-                #destroy()   
-
-
             pygame.display.update()
     
 
     pygame.quit()
-
 
 run = True
 
@@ -815,9 +786,7 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-
     pygame.display.update()
     
-
 pygame.quit()
 
